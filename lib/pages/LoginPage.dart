@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:validacion_de_formulario/src/bloc/Provider.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key key}) : super(key: key);
@@ -69,6 +70,7 @@ class LoginPage extends StatelessWidget {
   }
 
   _loginArea(BuildContext context) {
+    final bloc = Provider.of(context);
     final size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       padding: EdgeInsets.symmetric(vertical: 50.0),
@@ -94,8 +96,8 @@ class LoginPage extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Text("Ingreso",style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w600),),
-                _crearCorreo(),
-                _crearPass(),
+                _crearCorreo(bloc),
+                _crearPass(bloc),
                 _boton(),
                 
               ],
@@ -107,32 +109,53 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  _crearCorreo() {
-    return Container(
-      padding: EdgeInsets.only(top: 10.0),
-      child: TextField(
-        obscureText: false,
-        decoration: InputDecoration(
-          icon: Icon(Icons.alternate_email,color: Colors.deepPurple,),
-          labelText: "Correo Electronico",
-          hintText: "ejemplo@correo.com"
-        ),
-      ),
+  _crearCorreo(LogicBloc bloc) {
+
+    return StreamBuilder(
+      stream: bloc.emailStream,
+      builder: (BuildContext context,AsyncSnapshot snapshot){
+        return Container(
+          padding: EdgeInsets.only(top: 10.0),
+          child: TextField(
+            obscureText: false,
+            decoration: InputDecoration(
+              icon: Icon(Icons.alternate_email,color: Colors.deepPurple,),
+              labelText: "Correo Electronico",
+              counterText: snapshot.data,
+              hintText: "ejemplo@correo.com"
+            ),
+            onChanged: (value) => bloc.changeEmail(value),
+          ),
+        );
+      },
+
     );
+
+    
   }
   
-  _crearPass() {
-    return Container(
-      margin: EdgeInsets.only(bottom: 10.0),
-      padding: EdgeInsets.only(top: 10.0),
-      child: TextField(
-        obscureText: true,
-        decoration: InputDecoration(
-          icon: Icon(Icons.lock_outline,color: Colors.deepPurple,),
-          labelText: "Contraseña",
-        ),
-      ),
+  _crearPass(LogicBloc bloc) {
+
+    return StreamBuilder(
+      stream: bloc.passStream,      
+      builder: (BuildContext context, AsyncSnapshot snapshot){
+        return Container(
+          margin: EdgeInsets.only(bottom: 10.0),
+          padding: EdgeInsets.only(top: 10.0),
+          child: TextField(
+            obscureText: true,
+            decoration: InputDecoration(
+              icon: Icon(Icons.lock_outline,color: Colors.deepPurple,),
+              labelText: "Contraseña",
+              counterText: snapshot.data
+            ),
+            onChanged: bloc.changePass,
+          ),
+        );
+
+      }
     );
+
   }
 
   _boton() {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:validacion_de_formulario/src/bloc/Logic_bloc.dart';
+export 'package:validacion_de_formulario/src/bloc/Logic_bloc.dart';
 
 class Provider extends InheritedWidget{
   final loginBloc = LogicBloc();
