@@ -14,8 +14,8 @@ class LoginPage extends StatelessWidget {
     return Stack(
       children: <Widget>[
         _crearFondo(context),
-        
-        _cabezaFormLogin(context)
+        _cabezaFormLogin(context),
+        _loginArea(context),
       ],
     );
   }
@@ -54,7 +54,7 @@ class LoginPage extends StatelessWidget {
 
   _cabezaFormLogin(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return SingleChildScrollView(
+    return Container(
       padding: EdgeInsets.only(top: 60.0),
           child: Column(
             children: <Widget>[
@@ -66,5 +66,85 @@ class LoginPage extends StatelessWidget {
           ),
 
         );
+  }
+
+  _loginArea(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return SingleChildScrollView(
+      padding: EdgeInsets.symmetric(vertical: 60.0),
+      child: Column(
+        children: <Widget>[
+          SafeArea(child: Container(height: 100.0,)),
+          Container(
+            width: size.width * 0.9,
+            padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 30.0),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(5.0),
+              boxShadow: <BoxShadow>[
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 3.0,
+                  offset: Offset(0.0, 5.0),
+                  spreadRadius: 3.0
+                )
+              ]
+            ),
+            child: Column(
+              children: <Widget>[
+                Text("Ingreso",style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w600),),
+                _crearCorreo(),
+                _crearPass(),
+                _boton(),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  _crearCorreo() {
+    return Container(
+      padding: EdgeInsets.only(top: 10.0),
+      child: TextField(
+        obscureText: true,
+        decoration: InputDecoration(
+          icon: Icon(Icons.alternate_email,color: Colors.deepPurple,),
+          labelText: "Correo Electronico",
+          hintText: "ejemplo@correo.com"
+        ),
+      ),
+    );
+  }
+  
+  _crearPass() {
+    return Container(
+      padding: EdgeInsets.only(top: 10.0),
+      child: TextField(
+        obscureText: true,
+        decoration: InputDecoration(
+          icon: Icon(Icons.lock_outline,color: Colors.deepPurple,),
+          labelText: "Contraseña",
+        ),
+      ),
+    );
+  }
+
+  _boton() {
+    return RaisedButton(
+      onPressed: (){},
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 80.0,vertical: 15.0),
+        child: Text("Ingresar"),
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(5.0)
+      ),
+      elevation: 0.0,
+      color: Colors.deepPurple,
+      textColor: Colors.white,
+
+    );
   }
 }
