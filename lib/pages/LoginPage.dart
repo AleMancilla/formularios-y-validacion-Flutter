@@ -71,12 +71,13 @@ class LoginPage extends StatelessWidget {
   _loginArea(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(vertical: 60.0),
+      padding: EdgeInsets.symmetric(vertical: 50.0),
       child: Column(
         children: <Widget>[
           SafeArea(child: Container(height: 100.0,)),
           Container(
             width: size.width * 0.9,
+            margin: EdgeInsets.symmetric(vertical: 15.0),
             padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 30.0),
             decoration: BoxDecoration(
               color: Colors.white,
@@ -96,9 +97,11 @@ class LoginPage extends StatelessWidget {
                 _crearCorreo(),
                 _crearPass(),
                 _boton(),
+                
               ],
             ),
-          )
+          ),
+          Text("Olvido su contraseña?")
         ],
       ),
     );
@@ -108,7 +111,7 @@ class LoginPage extends StatelessWidget {
     return Container(
       padding: EdgeInsets.only(top: 10.0),
       child: TextField(
-        obscureText: true,
+        obscureText: false,
         decoration: InputDecoration(
           icon: Icon(Icons.alternate_email,color: Colors.deepPurple,),
           labelText: "Correo Electronico",
@@ -120,6 +123,7 @@ class LoginPage extends StatelessWidget {
   
   _crearPass() {
     return Container(
+      margin: EdgeInsets.only(bottom: 10.0),
       padding: EdgeInsets.only(top: 10.0),
       child: TextField(
         obscureText: true,
