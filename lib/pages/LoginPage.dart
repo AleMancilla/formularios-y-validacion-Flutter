@@ -98,7 +98,7 @@ class LoginPage extends StatelessWidget {
                 Text("Ingreso",style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w600),),
                 _crearCorreo(bloc),
                 _crearPass(bloc),
-                _boton(),
+                _boton(bloc),
                 
               ],
             ),
@@ -160,20 +160,28 @@ class LoginPage extends StatelessWidget {
 
   }
 
-  _boton() {
-    return RaisedButton(
-      onPressed: (){},
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 80.0,vertical: 15.0),
-        child: Text("Ingresar"),
-      ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(5.0)
-      ),
-      elevation: 0.0,
-      color: Colors.deepPurple,
-      textColor: Colors.white,
+  _boton(bloc) {
 
+    return StreamBuilder(
+      stream: bloc.formValidStream,
+      builder: (BuildContext context, AsyncSnapshot snapshot){
+        return RaisedButton(
+          onPressed: snapshot.hasData?(){}:null,
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 80.0,vertical: 15.0),
+            child: Text("Ingresar"),
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5.0)
+          ),
+          elevation: 0.0,
+          color: Colors.deepPurple,
+          textColor: Colors.white,
+
+        );
+      }
     );
+
+    
   }
 }
