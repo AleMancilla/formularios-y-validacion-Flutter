@@ -7,6 +7,9 @@ class LogicBloc with Validators {
   final _emailController = BehaviorSubject<String>();
   final _passController  = BehaviorSubject<String>();
 
+  String get email => _emailController.value;
+  String get pass => _passController.value; 
+
   Stream<String> get emailStream => _emailController.stream.transform(validarEmail);
   Stream<String> get passStream  => _passController.stream.transform(validarPassword);
 

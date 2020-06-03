@@ -166,7 +166,7 @@ class LoginPage extends StatelessWidget {
       stream: bloc.formValidStream,
       builder: (BuildContext context, AsyncSnapshot snapshot){
         return RaisedButton(
-          onPressed: snapshot.hasData?(){}:null,
+          onPressed: snapshot.hasData?()=> _infoLogin(bloc):null,
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 80.0,vertical: 15.0),
             child: Text("Ingresar"),
@@ -183,5 +183,13 @@ class LoginPage extends StatelessWidget {
     );
 
     
+  }
+
+  _infoLogin(LogicBloc bloc){
+    print("================");
+    print("Email: ${bloc.email}");
+    print("Pass: ${bloc.pass}");
+    print("================");
+
   }
 }
