@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:validacion_de_formulario/utils/utils.dart'as utils;
+import 'package:validacion_de_formulario/src/utils/utils.dart'as utils;
 
 class ProductoPage extends StatefulWidget {
   
@@ -57,7 +57,8 @@ class _ProductoPageState extends State<ProductoPage> {
     return TextFormField(
       keyboardType: TextInputType.number,
       decoration: InputDecoration(
-        labelText: 'Producto'
+        labelText: 'Producto',
+        
       ),
       validator: (value){
         if(utils.isNumeric(value)){
@@ -71,7 +72,7 @@ class _ProductoPageState extends State<ProductoPage> {
 
   _crearBoton(){
     return RaisedButton.icon(
-      onPressed: _submit(), 
+      onPressed: _submit, 
       icon: Icon(Icons.save), 
       textColor: Colors.white,
       label: Text("Guardar"),
