@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
         title: Text("AppBar"),
         actions: <Widget>[
           IconButton(icon: Icon(Icons.image), onPressed: (){}),
-          IconButton(icon: Icon(Icons.add), onPressed: (){}),
+          IconButton(icon: Icon(Icons.camera_alt), onPressed: (){}),
         ],
       ),
       body: Center(
