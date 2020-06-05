@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:validacion_de_formulario/src/models/Producto_model.dart';
+import 'package:validacion_de_formulario/src/providers/productos_provider.dart';
 import 'package:validacion_de_formulario/src/utils/utils.dart'as utils;
 
 class ProductoPage extends StatefulWidget {
@@ -14,7 +15,7 @@ class _ProductoPageState extends State<ProductoPage> {
   
   final formkey = GlobalKey<FormState>();
   ProductoModel producto = ProductoModel();
-
+  final productoProvider = ProductosProvider();
 
   @override
   Widget build(BuildContext context) {
@@ -100,6 +101,7 @@ class _ProductoPageState extends State<ProductoPage> {
     print(producto.titulo);
     print(producto.valor);
     print(producto.disponible);
+    productoProvider.createProducto(producto);
     
   }
 
