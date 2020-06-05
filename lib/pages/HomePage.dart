@@ -9,6 +9,10 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("AppBar"),
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.image), onPressed: (){}),
+          IconButton(icon: Icon(Icons.add), onPressed: (){}),
+        ],
       ),
       body: Center(
         child: Column(
@@ -20,6 +24,11 @@ class HomePage extends StatelessWidget {
             Text("Pass: ${bloc.pass}")
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).primaryColor,
+        onPressed: ()=>Navigator.pushNamed(context, "/producto"),
+        child: Icon(Icons.add),
       ),
     );
   }
