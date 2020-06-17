@@ -16,6 +16,7 @@ class _ProductoPageState extends State<ProductoPage> {
   final formkey = GlobalKey<FormState>();
   ProductoModel producto = ProductoModel();
   final productoProvider = ProductosProvider();
+  final scafooldkey = GlobalKey<ScaffoldState>() ;
   
   @override
   Widget build(BuildContext context) {
@@ -25,6 +26,7 @@ class _ProductoPageState extends State<ProductoPage> {
       producto = prodModel;
     }
     return Scaffold(
+      key: scafooldkey,
       appBar: AppBar(title: Text("AppBar"),
       actions: <Widget>[
         IconButton(icon: Icon(Icons.photo_size_select_actual),onPressed: (){},),
@@ -114,6 +116,8 @@ class _ProductoPageState extends State<ProductoPage> {
     }else{
       productoProvider.editarProductos(producto);
     }
+
+    mostrarSnackbar("Guardado Exitosamente");
     
   }
 
@@ -126,5 +130,13 @@ class _ProductoPageState extends State<ProductoPage> {
         producto.disponible = value;
       })
     );
+  }
+
+  void mostrarSnackbar(String mensaje){
+    final snack = SnackBar(
+      content: Text(mensaje),
+      duration: Duration(seconds: 2),
+    );
+    scafooldkey.currentState.showSnackBar(snack);
   }
 }
