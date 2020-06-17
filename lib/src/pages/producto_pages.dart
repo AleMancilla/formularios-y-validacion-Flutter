@@ -17,6 +17,7 @@ class _ProductoPageState extends State<ProductoPage> {
   ProductoModel producto = ProductoModel();
   final productoProvider = ProductosProvider();
   final scafooldkey = GlobalKey<ScaffoldState>() ;
+  bool _guardando = false;
   
   @override
   Widget build(BuildContext context) {
@@ -90,7 +91,7 @@ class _ProductoPageState extends State<ProductoPage> {
 
   _crearBoton(){
     return RaisedButton.icon(
-      onPressed: _submit, 
+      onPressed: _guardando? null : _submit, 
       icon: Icon(Icons.save), 
       textColor: Colors.white,
       label: Text("Guardar"),
@@ -108,7 +109,8 @@ class _ProductoPageState extends State<ProductoPage> {
     print(producto.titulo);
     print(producto.valor);
     print(producto.disponible);
-    
+    _guardando = true;
+    setState(() {    });
       print("###################3id#############");
       print(producto.id);
     if(producto.id == null){
@@ -118,7 +120,7 @@ class _ProductoPageState extends State<ProductoPage> {
     }
 
     mostrarSnackbar("Guardado Exitosamente");
-    
+    Navigator.pop(context);
   }
 
   _crearDisponible(){
