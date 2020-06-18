@@ -1,7 +1,10 @@
+//import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:validacion_de_formulario/src/models/Producto_model.dart';
 import 'package:validacion_de_formulario/src/providers/productos_provider.dart';
 import 'package:validacion_de_formulario/src/utils/utils.dart'as utils;
+import 'package:image_picker/image_picker.dart';
 
 class ProductoPage extends StatefulWidget {
   
@@ -18,6 +21,8 @@ class _ProductoPageState extends State<ProductoPage> {
   final productoProvider = ProductosProvider();
   final scafooldkey = GlobalKey<ScaffoldState>() ;
   bool _guardando = false;
+  final _picker = ImagePicker();
+  PickedFile foto ;
   
   @override
   Widget build(BuildContext context) {
@@ -30,8 +35,8 @@ class _ProductoPageState extends State<ProductoPage> {
       key: scafooldkey,
       appBar: AppBar(title: Text("AppBar"),
       actions: <Widget>[
-        IconButton(icon: Icon(Icons.photo_size_select_actual),onPressed: (){},),
-        IconButton(icon: Icon(Icons.camera_alt),onPressed: (){},),
+        IconButton(icon: Icon(Icons.photo_size_select_actual),onPressed: _seleccionarFoto,),
+        IconButton(icon: Icon(Icons.camera_alt),onPressed: _tomarFoto,),
       ],),
       body: SingleChildScrollView(
         child: Container(
@@ -40,6 +45,7 @@ class _ProductoPageState extends State<ProductoPage> {
             key: formkey,
             child: Column(
               children: <Widget>[
+                _mostrarFoto(),
                 _crearNombre(),
                 _crearPrecio(),
                 _crearDisponible(),
@@ -140,5 +146,29 @@ class _ProductoPageState extends State<ProductoPage> {
       duration: Duration(seconds: 2),
     );
     scafooldkey.currentState.showSnackBar(snack);
+  }
+
+  _mostrarFoto(){
+    if(producto.fotoUrl != null){
+      //TODO tengo que hacer esto
+      return Container();
+    }else{
+      return Image(
+        image: AssetImage(foto?.path??"images/no-image.png"),
+        height: 300.0,
+        fit: BoxFit.cover
+      );
+    }
+  }
+
+  _seleccionarFoto() async {
+    foto = await _picker.getImage(source: ImageSource.gallery);
+    if(foto != null ){
+      //limpiesa
+    }
+    setState(() { });
+  }
+  _tomarFoto(){
+
   }
 }
