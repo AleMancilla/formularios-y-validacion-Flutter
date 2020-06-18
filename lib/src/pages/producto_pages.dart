@@ -161,14 +161,19 @@ class _ProductoPageState extends State<ProductoPage> {
     }
   }
 
-  _seleccionarFoto() async {
-    foto = await _picker.getImage(source: ImageSource.gallery);
+  _seleccionarFoto() {
+    _procesarImagen(ImageSource.gallery);
+  }
+  _tomarFoto(){
+    _procesarImagen(ImageSource.camera);
+  }
+
+  _procesarImagen(ImageSource tipo)async{
+    
+    foto = await _picker.getImage(source: tipo);
     if(foto != null ){
       //limpiesa
     }
     setState(() { });
-  }
-  _tomarFoto(){
-
   }
 }
