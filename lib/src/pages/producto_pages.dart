@@ -159,7 +159,12 @@ class _ProductoPageState extends State<ProductoPage> {
   _mostrarFoto(){
     if(producto.fotoUrl != null){
       //TODO tengo que hacer esto
-      return Container();
+      return FadeInImage(
+        placeholder: AssetImage("images/jar-loading.gif"), 
+        image: NetworkImage(producto.fotoUrl),
+        fit: BoxFit.cover,
+        height: 300,
+      );
     }else{
       return Image(
         image: AssetImage(foto?.path ??"images/no-image.png"),

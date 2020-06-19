@@ -58,12 +58,23 @@ class HomePage extends StatelessWidget {
     return Dismissible(
       key: UniqueKey(),
       background: Container(color: Colors.redAccent,),
-      child: ListTile(
-        title: Text("${producto.titulo} - ${producto.valor}"),
-        subtitle: Text(producto.id),
-        onTap: ()=>Navigator.pushNamed(context, '/producto',arguments: producto),
-        
+      child: Column(
+        children: <Widget>[
+          FadeInImage(fit: BoxFit.cover,height: 300.0, placeholder: AssetImage("images/jar-loading.gif"), image: producto.fotoUrl==null?AssetImage("images/no-image.png") : NetworkImage(producto.fotoUrl)),
+          ListTile(
+            title: Text("${producto.titulo} - ${producto.valor}"),
+            subtitle: Text(producto.id),
+            onTap: ()=>Navigator.pushNamed(context, '/producto',arguments: producto),
+
+          ),
+        ],
       ),
+      //child: ListTile(
+      //  title: Text("${producto.titulo} - ${producto.valor}"),
+      //  subtitle: Text(producto.id),
+      //  onTap: ()=>Navigator.pushNamed(context, '/producto',arguments: producto),
+      //  
+      //),
       onDismissed: (direccion){
         productosProvider.borrarProducto(producto.id);
       },
