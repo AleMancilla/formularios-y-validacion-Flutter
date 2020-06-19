@@ -1,5 +1,9 @@
 //import 'dart:html';
 
+//import 'dart:html';
+
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:validacion_de_formulario/src/models/Producto_model.dart';
 import 'package:validacion_de_formulario/src/providers/productos_provider.dart';
@@ -21,8 +25,8 @@ class _ProductoPageState extends State<ProductoPage> {
   final productoProvider = ProductosProvider();
   final scafooldkey = GlobalKey<ScaffoldState>() ;
   bool _guardando = false;
-  final _picker = ImagePicker();
-  PickedFile foto ;
+  //final _picker = ImagePicker();
+  File foto ;
   
   @override
   Widget build(BuildContext context) {
@@ -108,7 +112,7 @@ class _ProductoPageState extends State<ProductoPage> {
       
     );
   }
-  _submit(){
+  _submit()async{
     if(!formkey.currentState.validate()) return;
     formkey.currentState.save();
     print("Todo Ok");
@@ -117,6 +121,10 @@ class _ProductoPageState extends State<ProductoPage> {
     print(producto.disponible);
     _guardando = true;
     setState(() {    });
+
+    if(foto!=null){
+      producto.fotoUrl = await productoProvider.subirImagen(foto);
+    }
       print("###################3id#############");
       print(producto.id);
     if(producto.id == null){
@@ -154,7 +162,7 @@ class _ProductoPageState extends State<ProductoPage> {
       return Container();
     }else{
       return Image(
-        image: AssetImage(foto?.path??"images/no-image.png"),
+        image: AssetImage(foto?.path ??"images/no-image.png"),
         height: 300.0,
         fit: BoxFit.cover
       );
@@ -170,7 +178,7 @@ class _ProductoPageState extends State<ProductoPage> {
 
   _procesarImagen(ImageSource tipo)async{
     
-    foto = await _picker.getImage(source: tipo);
+    foto = await ImagePicker.pickImage(source: tipo);
     if(foto != null ){
       //limpiesa
     }
