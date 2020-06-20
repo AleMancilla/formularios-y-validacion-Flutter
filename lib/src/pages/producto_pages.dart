@@ -186,6 +186,7 @@ class _ProductoPageState extends State<ProductoPage> {
     foto = await ImagePicker.pickImage(source: tipo);
     if(foto != null ){
       //limpiesa
+      producto.fotoUrl = null; 
     }
     setState(() { });
   }
