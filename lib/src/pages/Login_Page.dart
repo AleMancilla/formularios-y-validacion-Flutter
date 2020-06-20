@@ -103,7 +103,10 @@ class LoginPage extends StatelessWidget {
               ],
             ),
           ),
-          Text("Olvido su contraseña?")
+          FlatButton(
+            onPressed: ()=>Navigator.pushReplacementNamed(context, "/registro"),
+            child: Text("Crear una nueva cuenta")
+          )
         ],
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:validacion_de_formulario/src/pages/HomePage.dart';
-import 'package:validacion_de_formulario/src/pages/LoginPage.dart';
+import 'package:validacion_de_formulario/src/pages/Login_Page.dart';
+import 'package:validacion_de_formulario/src/pages/Registro_Page.dart';
 import 'package:validacion_de_formulario/src/pages/producto_pages.dart';
 import 'package:validacion_de_formulario/src/bloc/Provider.dart';
  
@@ -13,10 +14,11 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Material App',
         debugShowCheckedModeBanner: false,
-        initialRoute: "/home",
+        initialRoute: "/login",
         routes: {
           "/home" : (BuildContext context) => HomePage(),
           "/login": (BuildContext context) => LoginPage(),
+          "/registro": (BuildContext context) => RegistroPage(),
           "/producto": (BuildContext context) => ProductoPage(),
         },
         theme: ThemeData(
