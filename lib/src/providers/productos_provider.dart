@@ -6,13 +6,16 @@ import 'package:http/http.dart' as http;
 import 'package:validacion_de_formulario/src/models/Producto_model.dart';
 import 'package:mime_type/mime_type.dart';
 import 'package:http_parser/http_parser.dart';
+import 'package:validacion_de_formulario/src/preferencias_usuario/Preferencias_usuario.dart';
 
 
 class ProductosProvider{
   final String _url = 'https://flutter-81e76.firebaseio.com';
+  final _prefs = new PreferenciasUsuario();
+
   List<ProductoModel> productos = new List() ;
   Future<bool> createProducto(ProductoModel producto)async{
-    final url = '$_url/productos.json';
+    final url = '$_url/productos.json?auth=${_prefs.token}';
     final resp = await http.post(url,body: productoModelToJson(producto));
     final decodedData = json.decode(resp.body);
     print(decodedData);
@@ -21,7 +24,7 @@ class ProductosProvider{
   }
 
   Future<List<ProductoModel>> cargarProductos()async {
-    final url = '$_url/productos.json';
+    final url = '$_url/productos.json?auth=${_prefs.token}';
     final resp = await http.get(url);
     final decodedata = json.decode(resp.body);
     
@@ -35,7 +38,7 @@ class ProductosProvider{
     return productos;
   }
   Future<bool> editarProductos(ProductoModel producto)async{
-    final url = '$_url/productos/${producto.id}.json';
+    final url = '$_url/productos/${producto.id}.json?auth=${_prefs.token}';
     final resp = await http.put(url,body: productoModelToJson(producto));
     final decodedData = json.decode(resp.body);
     print(decodedData);
