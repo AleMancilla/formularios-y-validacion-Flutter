@@ -189,12 +189,34 @@ class LoginPage extends StatelessWidget {
     
   }
 
-  _infoLogin(LogicBloc bloc,BuildContext context){
+  _infoLogin(LogicBloc bloc,BuildContext context)async{
     //print("================");
     //print("Email: ${bloc.email}");
     //print("Pass: ${bloc.pass}");
     //print("================");
     //Navigator.pushReplacementNamed(context, "/home");
-    usuarioProvider.login(bloc.email, bloc.pass);
+    Map info = await usuarioProvider.login(bloc.email, bloc.pass);
+
+    if(info['ok']){
+      Navigator.pushReplacementNamed(context, '/home');
+    }else{
+      _mostrarAlerta(context,info['token']);
+    }
+
+  }
+
+  void _mostrarAlerta(BuildContext context, String mensaje) {
+    showDialog(
+      context: context,
+      builder: (context){
+        return AlertDialog(
+          title: Text('Informacion Incorrecta'),
+          content: (mensaje == null)? Text("no data"):Text(mensaje),
+          actions: <Widget>[
+            FlatButton(onPressed: ()=>Navigator.of(context).pop(), child: Text('Ok'))
+          ],
+        );
+      }
+    );
   }
 }
