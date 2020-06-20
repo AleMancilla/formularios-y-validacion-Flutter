@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:validacion_de_formulario/src/bloc/Provider.dart';
+import 'package:validacion_de_formulario/src/providers/UsuarioProvider.dart';
 
 class RegistroPage extends StatelessWidget {
+
+  final usuarioProvider = new UsuarioProvider();
 
   @override
   Widget build(BuildContext context) {
@@ -168,10 +171,10 @@ class RegistroPage extends StatelessWidget {
       stream: bloc.formValidStream,
       builder: (BuildContext context, AsyncSnapshot snapshot){
         return RaisedButton(
-          onPressed: snapshot.hasData?()=> _infoLogin(bloc,context):null,
+          onPressed: snapshot.hasData?()=> _register(bloc,context):null,
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 80.0,vertical: 15.0),
-            child: Text("Ingresar"),
+            child: Text("Registrar"),
           ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5.0)
@@ -187,12 +190,12 @@ class RegistroPage extends StatelessWidget {
     
   }
 
-  _infoLogin(LogicBloc bloc,BuildContext context){
-    print("================");
-    print("Email: ${bloc.email}");
-    print("Pass: ${bloc.pass}");
-    print("================");
-    Navigator.pushReplacementNamed(context, "/home");
-
+  _register(LogicBloc bloc,BuildContext context){
+    //print("================");
+    //print("Email: ${bloc.email}");
+    //print("Pass: ${bloc.pass}");
+    //print("================");
+    //Navigator.pushReplacementNamed(context, "/home");
+    usuarioProvider.nuevoUsuario(bloc.email, bloc.pass);
   }
 }
